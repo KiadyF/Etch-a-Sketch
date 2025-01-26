@@ -1,10 +1,11 @@
 const conteneur = document.querySelector(".container")
-let nombreCarre = parseInt(document.querySelector("input").value)
 const button = document.querySelector("button")
 let coteConteneur = conteneur.clientWidth
-let coteCarre = (coteConteneur - (nombreCarre - 2)) / nombreCarre
+let coteCarre
 let div
 let row
+let nombreCarre
+let contientElement
 
 function genererCouleur() {
     let r = Math.floor(Math.random() * 255) + 1
@@ -14,6 +15,10 @@ function genererCouleur() {
 }
 
 button.addEventListener("click", () => {
+    contientElement = conteneur.children
+    if (contientElement.length != 0) {
+        conteneur.innerHTML = ""
+    }
     nombreCarre = parseInt(document.querySelector("input").value)
     if (document.querySelector("input").value === '') {
         alert("Il faut entre le nombre du carré que vous voulez")
@@ -28,7 +33,7 @@ button.addEventListener("click", () => {
                 div = document.createElement("div")
                 div.style.width = coteCarre.toString() + 'px'
                 div.style.height = coteCarre.toString() + 'px'
-                div.addEventListener("mouseleave", function () {
+                div.addEventListener("mouseenter", function () {
                     if (this.style.backgroundColor === '') {
                         this.style.backgroundColor = genererCouleur()
                         this.style.opacity = '0.1'
